@@ -46,7 +46,7 @@
 	onMount(() => {
 		const uid = Cookies.get('uid') || '';
 		ctx = canvas.getContext('2d');
-		ws = new WebSocket('ws://localhost:3009');
+		ws = new WebSocket('ws://www.conner.soy:3009');
 		ws.addEventListener('message', getCurrentGameData);
 		ws.onopen = () => {
 			ws.send(JSON.stringify({ init: uid }));
