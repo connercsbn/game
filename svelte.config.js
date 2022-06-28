@@ -11,12 +11,11 @@ const config = {
 		prerender: {
 			default: true
 		},
-        adapter: adapter({
-			pages: 'public',
-			assets: 'public',
-			precompress: true
-	    })
-    }
+    adapter: adapter({
+      pages: 'public',
+      assets: 'public'
+    })
+  }
 }
 
 export default config;

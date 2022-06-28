@@ -46,7 +46,7 @@
 	onMount(() => {
 		const uid = Cookies.get('uid') || '';
 		ctx = canvas.getContext('2d');
-		ws = new WebSocket('ws://www.conner.soy:3009');
+		ws = new WebSocket('wss://ws.conner.soy');
 		ws.addEventListener('message', getCurrentGameData);
 		ws.onopen = () => {
 			ws.send(JSON.stringify({ init: uid }));
@@ -56,8 +56,6 @@
 
 <svelte:window on:mousemove={handleMouseMove} />
 <canvas bind:this={canvas} width={1200} height={800} />
-{mousePos.x.toString()}
-{mousePos.y.toString()}
 
 <style>
 	canvas {

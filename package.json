@@ -4,7 +4,7 @@
 	"scripts": {
 		"dev": "concurrently --kill-others \"npm run ws\" \"svelte-kit dev\"",
 		"build": "svelte-kit build",
-		"serve": "concurrently --kill-others \"npm run ws\" \"PORT=3010 node build\"",
+		"serve": "concurrently --kill-others \"npm run ws\" \"PORT=3010 serve public \"",
 		"ws": "node --loader ts-node/esm websockets/index.ts",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
