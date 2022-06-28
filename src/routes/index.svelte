@@ -16,13 +16,24 @@
 		ws.addEventListener('message', playGame);
 	}
 	type Moves = { id?: string; color?: string; moves?: [{ x: number; y: number }] };
-	const getCurrentGameData: WSEventHandler = ({ data }) => {
+	const getCurrentGameData: WSEventHandler = async ({ data }) => {
 		const metadata: Moves = JSON.parse(data);
 		console.log(metadata);
 		if ('moves' in metadata) {
-			for (const move of metadata.moves || []) {
-				fillPixel(move?.x, move?.y, Number(metadata.color));
-			}
+			console.log('getting moves...');
+			let i = 0;
+			let interval = window.setInterval(() => {
+				// for (const move of metadata.moves || []) {
+				//         fillPixel(move?.x, move?.y, Number(metadata.color));
+				// }
+				if (!metadata?.moves) {
+					return clearInterval(interval);
+				}
+				let currentMove = metadata?.moves[i++];
+				if (currentMove) {
+					fillPixel(currentMove.x, currentMove.y, Number(metadata.color));
+				}
+			}, 20);
 		} else if ('id' in metadata) {
 			id = metadata.id as string;
 			Cookies.set('uid', id);
@@ -46,7 +57,7 @@
 	onMount(() => {
 		const uid = Cookies.get('uid') || '';
 		ctx = canvas.getContext('2d');
-		ws = new WebSocket('ws://www.conner.soy:3009');
+		ws = new WebSocket('ws://localhost:3009');
 		ws.addEventListener('message', getCurrentGameData);
 		ws.onopen = () => {
 			ws.send(JSON.stringify({ init: uid }));
@@ -56,8 +67,6 @@
 
 <svelte:window on:mousemove={handleMouseMove} />
 <canvas bind:this={canvas} width={1200} height={800} />
-{mousePos.x.toString()}
-{mousePos.y.toString()}
 
 <style>
 	canvas {
