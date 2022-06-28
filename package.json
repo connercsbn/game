@@ -4,6 +4,7 @@
 	"scripts": {
 		"dev": "concurrently --kill-others \"npm run ws\" \"svelte-kit dev\"",
 		"build": "svelte-kit build",
+		"serve": "concurrently --kill-others \"node build\" \"svelte-kit dev\"",
 		"ws": "node --loader ts-node/esm websockets/index.ts",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
@@ -17,7 +18,7 @@
 	"devDependencies": {
 		"@playwright/test": "^1.22.2",
 		"@sveltejs/adapter-auto": "next",
-		"@sveltejs/adapter-static": "^1.0.0-next.34",
+		"@sveltejs/adapter-node": "^1.0.0-next.78",
 		"@sveltejs/kit": "next",
 		"@types/js-cookie": "^3.0.2",
 		"@types/node": "^18.0.0",
