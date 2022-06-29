@@ -20,7 +20,6 @@
 		const metadata: Moves = JSON.parse(data);
 		console.log(metadata);
 		if ('moves' in metadata) {
-			console.log('getting moves...');
 			let i = 0;
 			let interval = window.setInterval(() => {
 				// for (const move of metadata.moves || []) {
