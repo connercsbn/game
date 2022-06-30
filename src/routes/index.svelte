@@ -32,7 +32,7 @@
 				if (currentMove) {
 					fillPixel(currentMove.x, currentMove.y, Number(metadata.color));
 				}
-			}, 20);
+			}, 0);
 		} else if ('id' in metadata) {
 			id = metadata.id as string;
 			Cookies.set('uid', id);
