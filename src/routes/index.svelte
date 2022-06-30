@@ -25,9 +25,10 @@
 				if (!metadata?.moves) {
 					return clearInterval(interval);
 				}
-				let currentMove = metadata?.moves[i++];
-				if (currentMove) {
-					fillPixel(currentMove.x, currentMove.y, Number(metadata.color));
+				let currentMoves = metadata?.moves.slice(i, i+5);
+				if (currentMoves) {
+					currentMoves.forEach(move => fillPixel(move.x, move.y, Number(metadata.color)));
+					i+=5;
 				}
 			}, 0);
 		} else if ('id' in metadata) {
