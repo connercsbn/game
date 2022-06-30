@@ -22,9 +22,6 @@
 		if ('moves' in metadata) {
 			let i = 0;
 			let interval = window.setInterval(() => {
-				// for (const move of metadata.moves || []) {
-				//         fillPixel(move?.x, move?.y, Number(metadata.color));
-				// }
 				if (!metadata?.moves) {
 					return clearInterval(interval);
 				}
@@ -49,8 +46,9 @@
 	};
 	let mousePos: MousePos = { x: 0, y: 0 };
 	const handleMouseMove = (e: MouseEvent) => {
-		mousePos.x = e.x;
-		mousePos.y = e.y;
+		let rect = canvas.getBoundingClientRect();
+		mousePos.x = e.x - rect.left;
+		mousePos.y = e.y - rect.top;
 		ws.send(JSON.stringify({ player: id, mousePos: mousePos }));
 	};
 	onMount(() => {
@@ -65,13 +63,15 @@
 </script>
 
 <svelte:window on:mousemove={handleMouseMove} />
-<canvas bind:this={canvas} width={1200} height={800} />
+<canvas bind:this={canvas} width={1100} height={700} />
 
 <style>
 	canvas {
-		position: absolute;
-		z-index: -1;
-		overflow: hidden;
-		inset: 0;
+		border: solid;
+		border-image-source: url(https://media.istockphoto.com/photos/gold-vintage-frame-isolated-on-white-background-picture-id497315730);
+	    border-image-slice: 261;
+	    border-image-width: 271px;
+	    border-image-outset: 54;
+	    border-image-repeat: round;
 	}
 </style>
